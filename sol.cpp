@@ -55,14 +55,20 @@ typedef set<pll> spll;
 
 char __buffer[100000];
 
-void err(const char *format, ... ) {
 #ifdef LOCAL
+#define PRINT
+#endif
+
+// #undef PRINT
+
+void err(const char *format, ... ) {
+#ifdef PRINT
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
 	va_end(ap);
 	
-	fprintf(stderr, "%s", __buffer);
+	fprintf(stderr, "\t%s", __buffer);
 #else
 	if (format < 0) {
 		__buffer[0]++;
@@ -71,13 +77,13 @@ void err(const char *format, ... ) {
 }
 
 void errln(const char *format, ... ) {
-#ifdef LOCAL
+#ifdef PRINT
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
 	va_end(ap);
 	
-	fprintf(stderr, "%s\n", __buffer);
+	fprintf(stderr, "\t%s\n", __buffer);
 #else
 	if (format < 0) {
 		__buffer[0]++;
@@ -85,8 +91,18 @@ void errln(const char *format, ... ) {
 #endif
 }
 
+void errln() {
+#ifdef PRINT	
+	fprintf(stderr, "\n");
+#endif	
+}
+
+double START_TIME;
+
 void exit() {
-	cerr << "TIME: " << setprecision(5) << fixed << (double)clock() / CLOCKS_PER_SEC;
+#ifdef LOCAL	
+	cerr << "TIME: " << setprecision(5) << fixed << (clock() - START_TIME) / CLOCKS_PER_SEC;
+#endif	
 	exit(0);
 }
 
@@ -121,15 +137,19 @@ ostream& operator<<(ostream& s, map<T1, T2> t) {
 	return s;
 }
 
-#ifdef LOCAL
-#define dbg(x) cerr << __LINE__ << "\t" << #x << ": " << x << endl;
-#define dbg0(x, n) cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << x[ABC] << ' '; cerr << endl;
-#define dbg1(x, n) cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << x[ABC] << ' '; cerr << endl;
-#define ass(x) if (!(x)) { cerr << __LINE__ << "\tassertion failed: " << #x << endl, abort(); }
+#ifdef PRINT
+#define dbg(x) {cerr << __LINE__ << "\t" << #x << ": " << x << endl;}
+#define dbg0(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
+#define dbg1(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
 #else
 #define dbg(x) while(0){}
 #define dbg0(x, n) while(0){}
 #define dbg1(x, n) while(0){}
+#endif
+
+#ifdef LOCAL
+#define ass(x) if (!(x)) { cerr << __LINE__ << "\tassertion failed: " << #x << endl, abort(); }
+#else
 #define ass(x) assert(x)
 #endif
 
@@ -155,6 +175,7 @@ int main() {
 #ifdef LOCAL
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
+	START_TIME = (double)clock();
 #endif
 
 	exit();
