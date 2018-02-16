@@ -55,6 +55,10 @@ typedef set<pll> spll;
 
 char __buffer[100000];
 
+#ifdef _DEBUG
+#define LOCAL
+#endif
+
 #ifdef LOCAL
 #define PRINT
 #endif
@@ -101,7 +105,7 @@ double START_TIME;
 
 void exit() {
 #ifdef LOCAL	
-	cerr << "TIME: " << setprecision(5) << fixed << (clock() - START_TIME) / CLOCKS_PER_SEC;
+	cerr << "TIME: " << setprecision(5) << fixed << (clock() - START_TIME) / CLOCKS_PER_SEC << endl;
 #endif	
 	exit(0);
 }
@@ -152,24 +156,6 @@ ostream& operator<<(ostream& s, map<T1, T2> t) {
 #else
 #define ass(x) assert(x)
 #endif
-
-#define WR printf
-#define RE scanf
-#define PB push_back
-#define SE second
-#define FI first
- 
-#define FOR(i,k,n) for(int i=(k); i<=(n); i++)
-#define DFOR(i,k,n) for(int i=(k); i>=(n); i--)
-#define SZ(a) (int)((a).size())
-#define FA(i,v) FOR(i,0,SZ(v)-1)
-#define RFA(i,v) DFOR(i,SZ(v)-1,0)
-#define CLR(a) memset(a, 0, sizeof(a))
- 
-#define LL long long
-#define VI vector<int>
-#define PAR pair<int ,int>
-#define o_O 1000000000
 
 int main() {
 #ifdef LOCAL

@@ -55,6 +55,10 @@ typedef set<pll> spll;
 
 char __buffer[100000];
 
+#ifdef _DEBUG
+#define LOCAL
+#endif
+
 #ifdef LOCAL
 #define PRINT
 #endif
@@ -101,7 +105,7 @@ double START_TIME;
 
 void exit() {
 #ifdef LOCAL	
-	cerr << "TIME: " << setprecision(5) << fixed << (clock() - START_TIME) / CLOCKS_PER_SEC;
+	cerr << "TIME: " << setprecision(5) << fixed << (clock() - START_TIME) / CLOCKS_PER_SEC << endl;
 #endif	
 	exit(0);
 }
