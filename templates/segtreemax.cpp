@@ -27,7 +27,7 @@ int get_max(int l, int r, int tl = 1, int tr = n, int x = 1) {
 
 void update(int p, int v, int tl = 1, int tr = n, int x = 1) {
 	if (tl == tr) {
-		st[x] += v;
+		st[x] = v;
 		return;
 	}
 	int h = (tl + tr) / 2;
@@ -36,5 +36,5 @@ void update(int p, int v, int tl = 1, int tr = n, int x = 1) {
 	} else {
 		update(p, v, h + 1, tr, 2 * x + 1);
 	}
-	st[x] = st[2 * x] + st[2 * x + 1];
+	st[x] = max(st[2 * x], st[2 * x + 1]);
 }

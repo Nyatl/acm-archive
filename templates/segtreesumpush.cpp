@@ -9,9 +9,6 @@ void push(int x) {
 }
 
 void build(int tl = 1, int tr = n, int x = 1) {
-	push(x);
-	push(2 * x);
-	push(2 * x + 1);
 	if (tl == tr) {
 		st[x] = a[tl];
 		return;
@@ -22,7 +19,7 @@ void build(int tl = 1, int tr = n, int x = 1) {
 	st[x] = st[2 * x] + st[2 * x + 1]; 
 }
 
-int get_max(int l, int r, int tl = 1, int tr = n, int x = 1) {
+int get_sum(int l, int r, int tl = 1, int tr = n, int x = 1) {
 	push(x);
 	push(2 * x);
 	push(2 * x + 1);
@@ -31,15 +28,15 @@ int get_max(int l, int r, int tl = 1, int tr = n, int x = 1) {
 	}
 	int h = (tl + tr) / 2;
 	if (r <= h) {
-		return get_max(l, r, tl, h, 2 * x);
+		return get_sum(l, r, tl, h, 2 * x);
 	} else if (l >= h + 1) {
-		return get_max(l, r, h + 1, tr, 2 * x + 1);
+		return get_sum(l, r, h + 1, tr, 2 * x + 1);
 	} else {
-		return max(get_max(l, h, tl, h, 2 * x), get_sum(h + 1, r, h + 1, tr, 2 * x + 1)); 
+		return get_sum(l, h, tl, h, 2 * x) + get_sum(h + 1, r, h + 1, tr, 2 * x + 1); 
 	}
 }
 
-void update(int l, int r, int v, int tl = 1, int tr = 1, int x = 1) {
+void update(int l, int r, int v, int tl = 1, int tr = n, int x = 1) {
 	push(x);
 	push(2 * x);
 	push(2 * x + 1);

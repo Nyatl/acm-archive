@@ -111,34 +111,34 @@ void exit() {
 }
 
 template<typename A, typename B>
-ostream& operator<<(ostream& s, pair<A, B> p) {
-	s << "(" << p.first << ", " << p.second << ")";
-	return s;
+ostream& operator<<(ostream& os, pair<A, B> p) {
+	os << "(" << p.first << ", " << p.second << ")";
+	return os;
 }
 
 template<typename T>
-ostream& operator<<(ostream& s, vector<T> v) {
+ostream& operator<<(ostream& os, vector<T> v) {
 	fi(0, sz(v) - 1) {
-		s << v[i] << " ";
+		os << v[i] << " ";
 	}
-	return s;
+	return os;
 }
 
 template<typename T>
-ostream& operator<<(ostream& s, set<T> t) {
+ostream& operator<<(ostream& os, set<T> t) {
 	for (auto z : t) {
-		s << z << " ";
+		os << z << " ";
 	}
-	return s;
+	return os;
 }
 
 template<typename T1, typename T2>
-ostream& operator<<(ostream& s, map<T1, T2> t) {
+ostream& operator<<(ostream& os, map<T1, T2> t) {
 	cerr << endl;
 	for (auto z : t) {
-		s << "\t" << z.first << " -> " << z.second << endl;
+		os << "\t" << z.first << " -> " << z.second << endl;
 	}
-	return s;
+	return os;
 }
 
 #ifdef PRINT
