@@ -167,7 +167,7 @@ int n, m;
 char mapa[MAX][MAX];
 
 int d[MAX][MAX];
-
+int color[MAX][MAX];
 int dx[] = {1, 0, -1, 0};
 int dy[] = {0, 1, 0, -1};
 
@@ -203,21 +203,21 @@ void solve() {
 	}
 	set<pair<int, pii>> t;
 	t.insert(mp(0, mp(sx, sy)));
+	d[sx][sy] = 0;
 	while (sz(t)) {
 		pii p = t.begin()->second;
-		int dist = t.begin()->first;
 		int x = p.first;
 		int y = p.second;
 		t.erase(t.begin());
-		if (d[x][y] <= dist) continue;
-		d[x][y] = dist;
+		if (color[x][y]) continue;
+		color[x][y] = 1;
 		fi(0, 3) {
 			pii p2 = getnxt(x, y, i);
 			int x2 = p2.first;
 			int y2 = p2.second;
-			if (mapa[x2][y2] == '.') {
-				int dist2 = dist + abs(x2 - x) + abs(y2 - y);
-				if (dist2 >= d[x2][y2]) continue;
+			int dist2 = d[x][y] + abs(x2 - x) + abs(y2 - y);
+			if (mapa[x2][y2] == '.' && dist2 < d[x2][y2]) {
+				d[x2][y2] = dist2;
 				t.insert(mp(dist2, mp(x2, y2)));
 			}
 		}
