@@ -49,9 +49,12 @@ int num2(int x) {
 }
 
 int color[MAX];
+int C;
 
 int dfs(int x, int f) {
 	if (x == T) return f;
+	if (color[x] == C) return 0;
+	C++;
 	for (Edge *y=e[x]; y; y=y->next) {
 		if (y->f == y->c) continue;
 		int res = dfs(y->v, min(f, y->c - y->f)); 
@@ -68,6 +71,7 @@ int maxflow() {
 	int res = 0;
 	int flow = INF;
 	while(flow > 0) {
+		C++;
 		int f = dfs(S, flow);
 		if (f == 0) {
 			flow /= 2;
