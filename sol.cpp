@@ -1,27 +1,4 @@
-#define _CRT_SECURE_NO_DEPRECATE
-
-#include <string>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <deque>
-#include <queue>
-#include <stack>
-#include <bitset>
-#include <algorithm>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cstdarg>
-#include <memory.h>
-#include <assert.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -41,17 +18,11 @@ using namespace std;
 
 typedef long long ll;
 typedef vector<int> vi;
-typedef vector<string> vs;
 typedef pair<int, int> pii;
 typedef vector<pii> vpii;
-typedef set<int> si;
-typedef set<pii> spii;
 typedef vector<ll> vl;
-typedef vector<string> vs;
 typedef pair<ll, ll> pll;
 typedef vector<pll> vpll;
-typedef set<ll> sl;
-typedef set<pll> spll;
 
 char __buffer[100000];
 
@@ -59,14 +30,8 @@ char __buffer[100000];
 #define LOCAL
 #endif
 
-#ifdef LOCAL
-#define PRINT
-#endif
-
-// #undef PRINT
-
 void err(const char *format, ... ) {
-#ifdef PRINT
+#ifdef LOCAL
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
@@ -81,7 +46,7 @@ void err(const char *format, ... ) {
 }
 
 void errln(const char *format, ... ) {
-#ifdef PRINT
+#ifdef LOCAL
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
@@ -96,7 +61,7 @@ void errln(const char *format, ... ) {
 }
 
 void errln() {
-#ifdef PRINT	
+#ifdef LOCAL	
 	fprintf(stderr, "\n");
 #endif	
 }
@@ -141,7 +106,7 @@ ostream& operator<<(ostream& os, map<T1, T2> t) {
 	return os;
 }
 
-#ifdef PRINT
+#ifdef LOCAL
 #define dbg(x) {cerr << __LINE__ << "\t" << #x << ": " << x << endl;}
 #define dbg0(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
 #define dbg1(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
