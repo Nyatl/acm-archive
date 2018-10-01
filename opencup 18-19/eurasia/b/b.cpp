@@ -194,7 +194,8 @@ void add(int x) {
 
 int bsz;
 int cnt[MAX];
-set<int> buf;
+bool buf[MAX];
+int cursize;
 bool shown[MAX];
 ll T;
 int c; // decoded
@@ -202,16 +203,37 @@ int q; // shown
 bool bad = false;
 ll dt[MAX];
 
+void rem(int x) {
+	if (buf[x]) {
+		buf[x] = false;
+		cursize--;
+	}
+}
+
+void put(int x) {
+	assert(!buf[x]);
+	buf[x] = true;
+	cursize++;
+}
+
+bool inBuf(int x) {
+	return buf[x];
+}
+
+int cursz() {
+	return cursize;
+}
+
 void tryrem(int x) {
 	if (!shown[x]) return;
 	if (cnt[x] > 0) return;
-	buf.erase(x);
+	rem(x);
 }
 
 void show() {
 	int x = q;//per[q];
 	err("show %d\n", x);
-	if (!buf.count(x)) {
+	if (!inBuf(x)) {
 		bad = true;
 		err("failed to show %d\n", x);
 		return;
@@ -220,7 +242,6 @@ void show() {
 	tryrem(x);
 	T = max(T, d * q);
 
-	dbg(buf);
 	dbg(T);
 	q++;
 }
@@ -228,10 +249,10 @@ void show() {
 void dec() {
 	int x = per[c];
 	err("decode %d\n", x);
-	buf.insert(x);
+	put(x);
 	T += v[x].time;
 	dt[x] = T;
-	if (x * d < dt[x] || sz(buf) > bsz) {
+	if (x * d < dt[x] || cursz() > bsz) {
 		bad = true;
 		err("failed to decode %d\n", x);
 		return;
@@ -240,7 +261,6 @@ void dec() {
 	for (int z : v[x].par) cnt[z]--;
 	for (int z : v[x].par) tryrem(z);
 	c++;
-	dbg(buf);
 	dbg(T);
 }
 
@@ -252,8 +272,9 @@ bool check(ll bsz) {
 		cnt[i] = sz(v[i].chd);
 		shown[i] = false;
 		dt[i] = LINF;
+		buf[i] = false;
 	}
-	buf.clear();
+	cursize = 0;
 	c = 0;
 	q = 0;
 	T = -LINF;
@@ -271,7 +292,7 @@ bool check(ll bsz) {
 			show();
 			if (bad) return false;
 		}
-		while (c < n && sz(buf) < bsz) {
+		while (c < n && cursz() < bsz) {
 			f = true;
 			dec();
 			if (bad) return false;
