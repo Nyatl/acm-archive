@@ -1,4 +1,26 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <cstdarg>
+#include <memory>
+#include <cassert>
+#include <ctime>
+#include <tuple>
+#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
@@ -18,16 +40,16 @@ typedef long long ll;
 
 char __buffer[100000];
 
-int limit = 1000;
+int err_limit = 1000;
 
 void err(const char *format, ... ) {
-	if (limit-- <= 0) return;	
+	if (err_limit-- <= 0) return;	
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
 	va_end(ap);
 	
-	printf("%s", __buffer);
+	fprintf(stderr, "%s", __buffer);
 }
 
 class { 
