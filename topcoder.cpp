@@ -14,6 +14,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
 #include <cmath>
 #include <cstdarg>
 #include <cassert>
@@ -21,7 +22,6 @@
 #include <tuple>
 #include <unordered_set>
 #include <unordered_map>
-#include <memory.h>
 
 using namespace std;
 
