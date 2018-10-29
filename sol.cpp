@@ -1,16 +1,41 @@
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <bitset>
+#include <algorithm>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <cmath>
+#include <cstdarg>
+#include <cassert>
+#include <ctime>
+#include <tuple>
+#include <unordered_set>
+#include <unordered_map>
 
 using namespace std;
 
 #define pb push_back
 #define pf push_front
 #define mp make_pair
-#define fi(a, b) for(int i=a; i<=b; i++)
-#define fj(a, b) for(int j=a; j<=b; j++)
-#define fo(a, b) for(int o=a; o<=b; o++)
-#define fdi(a, b) for(int i=a; i>=b; i--)
-#define fdj(a, b) for(int j=a; j>=b; j--)
-#define fdo(a, b) for(int o=a; o>=b; o--)
+#define fi(a, b) for(auto i=a; i<=b; i++)
+#define fj(a, b) for(auto j=a; j<=b; j++)
+#define fo(a, b) for(auto o=a; o<=b; o++)
+#define fy(a) for(auto &y : a)
+#define fz(a) for(auto &z : a)
+#define fdi(a, b) for(auto i=a; i>=b; i--)
+#define fdj(a, b) for(auto j=a; j>=b; j--)
+#define fdo(a, b) for(auto o=a; o>=b; o--)
 #define clr(x) memset(x, 0, sizeof(x))
 #define cpy(x,y) memcpy(x, y, sizeof(y))
 #define sz(x) (int)x.size()
@@ -107,9 +132,9 @@ ostream& operator<<(ostream& os, map<T1, T2> t) {
 }
 
 #ifdef LOCAL
-#define dbg(x) {cerr << __LINE__ << "\t" << #x << ": " << x << endl;}
-#define dbg0(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
-#define dbg1(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << x[ABC] << ' '; cerr << endl;}
+#define dbg(x) {cerr << __LINE__ << "\t" << #x << ": " << (x) << endl;}
+#define dbg0(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << (x[ABC]) << ' '; cerr << endl;}
+#define dbg1(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << (x[ABC]) << ' '; cerr << endl;}
 #else
 #define dbg(x) while(0){}
 #define dbg0(x, n) while(0){}
