@@ -1,8 +1,8 @@
 int st[4 * MAX];
 int upd[4 * MAX];
 
-void push(int x) {
-	st[x] += upd[x];
+void push(int x, int tl, int tr) {
+	st[x] += upd[x] * (tr - tl + 1);
 	if (2 * x < 4 * MAX) upd[2 * x] += upd[x];
 	if (2 * x + 1 < 4 * MAX) upd[2 * x + 1] += upd[x];
 	upd[x] = 0;
@@ -20,12 +20,12 @@ void build(int tl = 1, int tr = n, int x = 1) {
 }
 
 int get_sum(int l, int r, int tl = 1, int tr = n, int x = 1) {
-	push(x);
+	push(x, tl, tr);
 	if (l == tl && r == tr) {
 		return st[x];
 	}
-	push(2 * x);
-	push(2 * x + 1);
+	push(2 * x, tl, tr);
+	push(2 * x + 1, tl, tr);
 	int h = (tl + tr) / 2;
 	if (r <= h) {
 		return get_sum(l, r, tl, h, 2 * x);
@@ -37,15 +37,15 @@ int get_sum(int l, int r, int tl = 1, int tr = n, int x = 1) {
 }
 
 void update(int l, int r, int v, int tl = 1, int tr = n, int x = 1) {
-	push(x);
+	push(x, tl, tr);
 	if (l == tl && r == tr) {
 		st[x] += v;
-		push(2 * x);
-		push(2 * x + 1);
+		push(2 * x, tl, tr);
+		push(2 * x + 1, tl, tr);
 		return;
 	}
-	push(2 * x);
-	push(2 * x + 1);
+	push(2 * x, tl, tr);
+	push(2 * x + 1, tl, tr);
 	int h = (tl + tr) / 2;
 	if (r <= h) {
 		update(l, r, v, tl, h, 2 * x);
