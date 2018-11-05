@@ -1,7 +1,11 @@
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381045
+
 struct Node {
 	int c;
 	Node *p;
-	Node(int c): c(c) {}
+	Node(int c): c(c) {
+		p = this;
+	}
 }
 
 Node *node[MAX];
