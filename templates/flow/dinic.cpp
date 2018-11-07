@@ -1,4 +1,5 @@
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381115
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381118
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381134
 
 int S, T;
 
@@ -41,16 +42,34 @@ int getnum(pii x) {
 	return num[x];
 }
 
-int color[MAX];
-int C;
 
-int dfs(int x, int f, int want = 0) {
+int dist[MAX];
+
+bool bfs() {
+	fi(1, n) {
+		dist[i] = -1;
+	}
+	dist[S] = 0;
+	queue<int> qu;
+	qu.push(S);
+	while (sz(qu)) {
+		int x = qu.front();
+		qu.pop();
+		for (auto z : e[x]) {
+			if (z->f == z->c) continue;
+			if (dist[z->v] != -1) continue;
+			dist[z->v] = dist[x] + 1;
+			qu.push(z->v);
+		}
+	}
+	return (dist[T] != -1);
+}
+
+int dfs(int x, int f) {
 	if (x == T) return f;
-	if (color[x] == C) return 0;
-	color[x] = C;
 	for (auto z : e[x]) {
-		if (z->f == z->c) continue;
-		if (z->c - z->f < want) continue;
+		if (z->f == z->c) continue;		
+		if (dist[x] + 1 != dist[z->v]) continue;
 		int res = dfs(z->v, min(f, z->c - z->f)); 
 		if (res) {
 			z->f += res;
@@ -65,14 +84,12 @@ const int INF = 1000 * 1000 * 1000 + 41;
 
 int maxflow() {
 	int res = 0;
-	int flow = INF;
-	while(flow > 0) {
-		C++;
-		int f = dfs(S, flow, flow);
-		if (f == 0) {
-			flow /= 2;
-		} else {
-			res += f;
+	while (1) {
+		if (!bfs()) break;
+		while (1) {
+			int resp = dfs(S, INF);
+			if (!resp) break;
+			res += resp;
 		}		
 	}
 	return res;
