@@ -1,5 +1,7 @@
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381118
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381134
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381136
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381137
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381141
+
 
 int S, T;
 
@@ -29,7 +31,6 @@ void insert(int x, int v, int c) {
 	temp2->rev = temp;
 
 	e[x].pb(temp);
-	e[v].pb(temp2);
 }
 
 map<pii, int> num;
@@ -67,12 +68,21 @@ bool bfs() {
 
 int dfs(int x, int f) {
 	if (x == T) return f;
-	for (auto z : e[x]) {
+	fi(0, sz(e[x]) - 1) {
+		auto z = e[x][i];
+
 		if (z->f == z->c) continue;		
 		if (dist[x] + 1 != dist[z->v]) continue;
 		int res = dfs(z->v, min(f, z->c - z->f)); 
-		if (res) {
+		if (res) {			
 			z->f += res;
+			if (z->f == z->c) {
+				swap(e[x][i], e[x].back());
+				e[x].pop_back();
+			}
+			if (z->rev->f == z->rev->c) {										
+				e[z->v].pb(z->rev);
+			}
 			z->rev->f -= res;
 			return res;
 		}
@@ -85,12 +95,12 @@ const int INF = 1000 * 1000 * 1000 + 41;
 int maxflow() {
 	int res = 0;
 	while (1) {
-		if (!bfs()) break;
+		if (!bfs()) break;	
 		while (1) {
 			int resp = dfs(S, INF);
 			if (!resp) break;
 			res += resp;
 		}		
-	}
+	}	
 	return res;
 }
