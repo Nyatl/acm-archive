@@ -1,5 +1,6 @@
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381117
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381133
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381446
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381447
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381449
 
 int S, T;
 
