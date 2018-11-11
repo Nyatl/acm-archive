@@ -6,7 +6,7 @@ struct Node {
 	Node(int c): c(c) {
 		p = this;
 	}
-}
+};
 
 Node *node[MAX];
 
