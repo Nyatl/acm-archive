@@ -25,7 +25,7 @@ void dfs(int x, int p = -1) {
 }
 
 void findbridges() {
-	fill_n(&ans[1], m, 0);
+	fill_n(&bridge[1], m, 0);
 	fill_n(&tin[1], n, 0);
 	fill_n(&fup[1], n, 0);
 	cnt = 0;
