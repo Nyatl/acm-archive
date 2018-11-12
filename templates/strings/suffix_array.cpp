@@ -49,13 +49,13 @@ void suffix_array(vector<string> vs) {
 	int len = 1;
 
 	while (len < N) {
-	  fill_n(&cnt[0], q + 1, 0);
-	  fill_n(&pref[0], q + 1, 0);		
+		fill_n(&cnt[0], q + 1, 0);
+		fill_n(&pref[0], q + 1, 0);		
 	  
-	  fi(0, N - 1) {
-	  	cnt[cl[i]]++;
-	  }	  
-	  fi(0, q) {
+	  	fi(0, N - 1) {
+	  		cnt[cl[i]]++;
+	  	}	  
+	  	fi(0, q) {
 			pref[i] = cnt[i];
 			if (i) { 
 				pref[i] += pref[i - 1];
