@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1381646
+=======
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381605
+>>>>>>> e78370127a6a740d9b7cdd16eb978aa28d61ea3c
 
 char s[MAX];
 int p0[MAX];
@@ -49,13 +53,13 @@ void suffix_array(vector<string> vs) {
 	int len = 1;
 
 	while (len < N) {
-	  fill_n(&cnt[0], q + 1, 0);
-	  fill_n(&pref[0], q + 1, 0);		
+		fill_n(&cnt[0], q + 1, 0);
+		fill_n(&pref[0], q + 1, 0);		
 	  
-	  fi(0, N - 1) {
-	  	cnt[cl[i]]++;
-	  }	  
-	  fi(0, q) {
+	  	fi(0, N - 1) {
+	  		cnt[cl[i]]++;
+	  	}	  
+	  	fi(0, q) {
 			pref[i] = cnt[i];
 			if (i) { 
 				pref[i] += pref[i - 1];
