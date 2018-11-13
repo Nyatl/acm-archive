@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1381646
-=======
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381605
->>>>>>> e78370127a6a740d9b7cdd16eb978aa28d61ea3c
 
 char s[MAX];
 int p0[MAX];
