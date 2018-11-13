@@ -1,4 +1,5 @@
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381646
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381643
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381654
 
 char s[MAX];
 int p0[MAX];
@@ -11,6 +12,62 @@ int pref[MAX];
 int startpos[MAX];
 int invp[MAX];
 int N;
+
+int lcp[MAX][LOG];
+int deg[MAX];
+
+int getmin(int l, int r) {
+	int d = deg[r - l + 1];
+	return min(lcp[l][d], lcp[r - (1 << d) + 1][d]);
+}
+
+int getlcp(int x, int y, int lx, int rx, int ly, int ry) {
+	int px = invp[startpos[x - 1] + lx - 1];
+	int py = invp[startpos[y - 1] + ly - 1];	
+	if (px == py) return min(rx - lx + 1, ry - ly + 1);
+	if (px > py) swap(px, py);
+	int res = getmin(px + 1, py);
+	res	= min(res, min(rx - lx + 1, ry - ly + 1));
+	return res;
+}
+
+void build_lcp() {
+	fi(0, LOG - 1) {
+		deg[(1 << i)] = i;
+	}
+	fi(1, N) {
+		if (!deg[i]) deg[i] = deg[i - 1];
+	}
+
+	fo(0, LOG - 1) {
+		fi(0, N - 1) {
+			lcp[i][o] = 0;
+		}
+	}
+
+	int cur = 0;
+	fi(0, N - 1) {
+		cur--;
+		cur = max(cur, 0);
+		int x = invp[i];
+		if (x == 0) {
+			lcp[x][0] = 0;
+			continue;
+		}
+		int a = i;
+		int b = p[x - 1];
+		while (a + cur < N && b + cur < N && s[a + cur] == s[b + cur]) {
+			cur++;
+		}
+		lcp[x][0] = cur;
+	}
+
+	fo(1, LOG - 1) {
+		for (int i = 0; i + (1 << o) - 1 < N; i++) {
+			lcp[i][o] = min(lcp[i][o - 1], lcp[i + (1 << (o - 1))][o - 1]);
+		}
+	}
+}
 
 int norm(int x) {
 	x %= N;
@@ -94,6 +151,8 @@ void suffix_array(vector<string> vs) {
 	fi(0, N - 1) {
 		invp[p[i]] = i;
 	}
+
+	build_lcp();
 
 	q = max(q, 255);
 	fill_n(&pref[0], q + 1, 0);
