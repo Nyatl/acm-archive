@@ -1,4 +1,4 @@
-//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381583
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381605
 
 char s[MAX];
 int p0[MAX];
