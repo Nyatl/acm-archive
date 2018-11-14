@@ -1,3 +1,4 @@
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381698
 int a[MAX][MAX];
 int n, m;
 int ans[MAX];
