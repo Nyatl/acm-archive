@@ -1,20 +1,20 @@
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381775
+
 struct Edge {
 	int v;
 	int w;
-	Edge *next;
+	Edge () {};
+	Edge (int v, int w) : v(v), w(w) {};
 };
 
-Edge *e[MAX];
+vector<Edge*> e[MAX];
 
 void insert(int x, int v, int w) {
-	Edge *temp = new Edge;
-	temp->v = v;
-	temp->w = w;
-	temp->next = e[x];
-	e[x] = temp;
+	e[x].pb(new Edge(v, w));
+	e[v].pb(new Edge(x, w));
 }
 
-int d[MAX];
+ll d[MAX];
 int p[MAX];
 int color[MAX];
 
@@ -24,8 +24,8 @@ vector<int> dij(int a, int b) {
 		p[i] = 0;
 		color[i] = 0;
 	}
-	set <pair<int, int> > t;
-	t.insert(mp(0, a));
+	set <pair<ll, int> > t;
+	t.insert(mp(0LL, a));
 	d[a] = 0;
 	while (sz(t)) {
 		int x = t.begin()->second;
@@ -33,11 +33,11 @@ vector<int> dij(int a, int b) {
 		if (color[x]) continue;
 		color[x] = 1;
 
-		for (Edge *y=e[x]; y; y=y->next) {
-			if (d[x] + y->w < d[y->v]) {
-				d[y->v] = d[x] + y->w;
-				p[y->v] = x;
-				t.insert(mp(d[y->v], y->v));
+		for (auto z : e[x]) {
+			if (d[x] + z->w < d[z->v]) {
+				d[z->v] = d[x] + z->w;
+				p[z->v] = x;
+				t.insert(mp(d[z->v], z->v));
 			}
 		}
 	}
@@ -51,3 +51,5 @@ vector<int> dij(int a, int b) {
 	}
 	return res;
 }
+
+

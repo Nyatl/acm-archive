@@ -1,3 +1,5 @@
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1381782
+
 int ext_gcd(int a, int b, int &x, int &y) {
 	if (a == 0) {
 		x = 0; y = 1;
