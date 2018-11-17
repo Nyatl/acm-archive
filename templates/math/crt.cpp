@@ -1,4 +1,5 @@
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1382016
+
 int phi(int n) {
 	int res = n;
 	for (int i = 2; i * i <= n; i++) {
@@ -41,7 +42,7 @@ int inv(ll x, int MOD) {
 	return bp(x2, phi(MOD) - 1, MOD);
 }
 
-void solve() {
+ll crt() {
 	ll rem = r[1];
 	ll mod = m[1];
 	fi(2, n) {
@@ -52,5 +53,5 @@ void solve() {
 		rem = rem + mod * k;
 		mod *= m[i];
 	}
-	printf("%lld\n", rem);
+	return rem;
 }
