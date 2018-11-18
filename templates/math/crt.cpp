@@ -46,8 +46,7 @@ ll crt() {
 	ll rem = r[1];
 	ll mod = m[1];
 	fi(2, n) {
-		int rr = (int) ((r[i] - rem) % m[i]);
-		if (rr < 0) rr += m[i];
+		int rr = (int) (((r[i] - rem) % m[i] + m[i]) % m[i]);		
 		int resp = inv(mod, m[i]);
 		ll k = ((ll) rr * resp) % m[i];
 		rem = rem + mod * k;
