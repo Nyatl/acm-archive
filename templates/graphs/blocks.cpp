@@ -75,10 +75,6 @@ void dfs2(int x, int curcolor, int p = -1) {
 
 vector<vpii> block;
 
-bool cmp(const vpii &a, const vpii &b) {
-	return sz(a) > sz(b);
-}
-
 void findblocks() {
 	cutvertices();	
 	col = 0;
@@ -98,9 +94,11 @@ void findblocks() {
 			}
 		}
 	}
-	sort(block.begin(), block.end(), cmp);
-	while (sz(block) && sz(block.back()) == 0) {
-		block.pop_back();
+	fdi(sz(block) - 1, 0) {
+		if (sz(block[i]) == 0) {
+			swap(block[i], block.back());
+			block.pop_back();
+		}
 	}
 }
 
