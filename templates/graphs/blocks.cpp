@@ -1,5 +1,5 @@
-//NOT TESTED!!!
-//THIS CODE IS THE SOLUTION FOR templates_blocks, templates_blocks hasn't checker now!!!
+//tested: https://bacs.cs.istu.ru/submit_view.php?id=1382810
+
 vpii e[MAX];
 
 int ans[MAX];
