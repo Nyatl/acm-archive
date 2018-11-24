@@ -32,11 +32,13 @@ void insert(int x, int v, int c) {
 }
 
 map<pii, int> num;
+int k;
 
 int getnum(pii x) {
 	if (!num.count(x)) {
-		int g = sz(num);
+		int g = k + 1;
 		num[x] = g;
+		k++;
 	}
 	return num[x];
 }

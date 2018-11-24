@@ -20,8 +20,9 @@ map<pii, int> num;
 
 int getnum(pii x) {
 	if (!num.count(x)) {
-		int g = sz(num);
+		int g = k + 1;
 		num[x] = g;
+		k++;
 	}
 	return num[x];
 }

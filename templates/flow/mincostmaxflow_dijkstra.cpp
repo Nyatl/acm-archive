@@ -2,6 +2,7 @@
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1381186
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1381188
 //tested: https://bacs.cs.istu.ru/submit_view.php?id=1381187
+//tested: https://codeforces.com/contest/1061/submission/46169776
 
 struct Edge {
 	int v;
@@ -36,16 +37,17 @@ void insert(int x, int v, int c, int w) {
 	e[v].pb(temp2);
 }
 
-int S = 1;
-int T = 2;
+int S;
+int T;
 int k;
 
 map<pii, int> num;
 
 int getnum(pii x) {
 	if (!num.count(x)) {
-		int g = sz(num);
+		int g = k + 1;
 		num[x] = g;
+		k++;
 	}
 	return num[x];
 }
