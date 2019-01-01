@@ -55,41 +55,37 @@ char __buffer[100000];
 #define LOCAL
 #endif
 
-void err(const char *format, ... ) {
 #ifdef LOCAL
+void err(const char *format, ... ) {
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
 	va_end(ap);
 	
 	fprintf(stderr, "\t%s", __buffer);
-#else
-	if (format < 0) {
-		__buffer[0]++;
-	}
-#endif
 }
+#else
+#define err(...) {}
+#endif
 
-void errln(const char *format, ... ) {
 #ifdef LOCAL
+void errln(const char *format, ... ) {
 	va_list ap;
 	va_start(ap, format);
 	vsprintf(__buffer, format, ap);
 	va_end(ap);
 	
 	fprintf(stderr, "\t%s\n", __buffer);
+}
 #else
-	if (format < 0) {
-		__buffer[0]++;
-	}
+#define errln(...) {}
 #endif
-}
 
+#ifdef LOCAL
 void errln() {
-#ifdef LOCAL	
 	fprintf(stderr, "\n");
-#endif	
 }
+#endif
 
 double START_TIME;
 
@@ -136,9 +132,9 @@ ostream& operator<<(ostream& os, map<T1, T2> t) {
 #define dbg0(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 0; ABC < n; ABC++) cerr << (x[ABC]) << ' '; cerr << endl;}
 #define dbg1(x, n) {cerr << __LINE__ << "\t" << #x << ": "; for (int ABC = 1; ABC <= n; ABC++) cerr << (x[ABC]) << ' '; cerr << endl;}
 #else
-#define dbg(x) while(0){}
-#define dbg0(x, n) while(0){}
-#define dbg1(x, n) while(0){}
+#define dbg(x) {}
+#define dbg0(x, n) {}
+#define dbg1(x, n) {}
 #endif
 
 #ifdef LOCAL
