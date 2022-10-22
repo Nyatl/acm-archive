@@ -9,6 +9,7 @@
 #include <bitset>
 #include <algorithm>
 #include <sstream>
+#include <functional>
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
