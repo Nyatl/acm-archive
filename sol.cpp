@@ -9,10 +9,11 @@
 #include <bitset>
 #include <algorithm>
 #include <sstream>
-#include <functional>
 #include <iostream>
 #include <iomanip>
 #include <cstdio>
+#include <optional>
+#include <functional>
 #include <cstdlib>
 #include <ctime>
 #include <cstring>
@@ -21,6 +22,8 @@
 #include <cassert>
 #include <ctime>
 #include <tuple>
+#include <random>
+#include <chrono>
 #include <unordered_set>
 #include <unordered_map>
 
@@ -29,6 +32,7 @@ using namespace std;
 #define pb push_back
 #define pf push_front
 #define mp make_pair
+#define mt make_tuple
 #define fi(a, b) for(auto i=a; i<=b; i++)
 #define fj(a, b) for(auto j=a; j<=b; j++)
 #define fo(a, b) for(auto o=a; o<=b; o++)
@@ -53,6 +57,12 @@ typedef pair<ll, ll> pll;
 typedef vector<pll> vpll;
 
 char __buffer[100000];
+
+mt19937_64 rnd(chrono::steady_clock::now().time_since_epoch().count());
+
+void randomize(long long seed) {
+	rnd = mt19937_64(seed);
+}
 
 #ifdef _DEBUG
 #define LOCAL
@@ -105,9 +115,27 @@ ostream& operator<<(ostream& os, pair<A, B> p) {
 	return os;
 }
 
+template<typename A, typename B>
+ostream& operator<<(ostream& os, tuple<A, B> t) {
+	os << "(" << get<0>(t) << ", " << get<1>(t) << ")";
+	return os;
+}
+
+template<typename A, typename B, typename C>
+ostream& operator<<(ostream& os, tuple<A, B, C> t) {
+	os << "(" << get<0>(t) << ", " << get<1>(t) << ", " << get<2>(t) << ")";
+	return os;
+}
+
+template<typename A, typename B, typename C, typename D>
+ostream& operator<<(ostream& os, tuple<A, B, C, D> t) {
+	os << "(" << get<0>(t) << ", " << get<1>(t) << ", " << get<2>(t) << ", " << get<3>(t) << ")";
+	return os;
+}
+
 template<typename T>
 ostream& operator<<(ostream& os, vector<T> v) {
-	fi(0, sz(v) - 1) {
+	for (int i = 0; i < sz(v); i++) {
 		os << v[i] << " ";
 	}
 	return os;
@@ -115,6 +143,14 @@ ostream& operator<<(ostream& os, vector<T> v) {
 
 template<typename T>
 ostream& operator<<(ostream& os, set<T> t) {
+	for (auto z : t) {
+		os << z << " ";
+	}
+	return os;
+}
+
+template<typename T>
+ostream& operator<<(ostream& os, multiset<T> t) {
 	for (auto z : t) {
 		os << z << " ";
 	}
